@@ -25,15 +25,15 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
                 <UserPlus className="h-4 w-4 ml-auto" />
             </DropdownMenuItem>)
             }
-            {isAdmin && (<DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">Server Settings
+            {isAdmin && (<DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer" onClick={()=>onOpen("editServer",{server})}>Server Settings
                 <Settings className="h-4 w-4 ml-auto" />
             </DropdownMenuItem>)
             }
-            {isAdmin && (<DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">Manage Members
+            {isAdmin && (<DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer" onClick={()=>onOpen("members",{server})}>Manage Members
                 <Users className="h-4 w-4 ml-auto" />
             </DropdownMenuItem>)
             }
-            {isModerator && (<DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">Create Channel
+            {isModerator && (<DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer"onClick={()=>onOpen("createChannel")}>Create Channel
                 <PlusCircle className="h-4 w-4 ml-auto" />
             </DropdownMenuItem>)
             }
