@@ -14,6 +14,8 @@ import {Form,FormControl,FormField,FormItem,FormLabel,FormMessage} from "@/compo
 import{Input} from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "../file-upload";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 const formSchema = z.object({name:z.string().min(1,{message:"Server name is required"}),imageUrl:z.string().min(1,{message:"Server image is required"})});
 export const InitialModal = () => {
     const [isMouted,setIsMouted] = useState(false);
@@ -21,8 +23,17 @@ export const InitialModal = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {name:"",imageUrl:"",}});
     const isLoading = form.formState.isSubmitting;
+    const routes = useRouter();
     const onSubmit =  async (values:z.infer<typeof formSchema>) => {
-        console.log(values);
+        try { 
+            await axios.post("/api/servers",values);
+            form.reset();
+            routes.refresh();
+            window.location.reload();
+        }
+        catch (error){
+            console.log(error);
+        }
     };
     useEffect(() => {
         setIsMouted(true);
